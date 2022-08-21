@@ -38,7 +38,6 @@ class Branch:
 
 
 class Git:
-    @CACHE
     def _fetch(self, args):
         print("FETCH:", " ".join(args))
         return check_output(args).decode()
@@ -51,7 +50,7 @@ class Git:
         self._run(["git", "fetch", "-p"])
 
     @property
-    @CACHE(10)
+    @CACHE
     def branches(self):
         self.fetch()
         refs = [

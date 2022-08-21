@@ -2,7 +2,9 @@ import argparse
 import os
 from .git import Git
 import time
-
+import sys
+from subprocess import call
+from pathlib import Path
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -16,22 +18,19 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f",
         "--file",
-        default="pyci.yml",
+        default="pyci_pipeline.py",
         help="instruction set for pyci, default='pyci.yml'",
     )
     args = parser.parse_args()
     repo = Git()
-    for b in repo.branches:
-        if b.is_behind:
-            with b:
-                print(f"just checked out {b.name}")
-        print(f"  {b.name}: behind={b.is_behind}")
-    time.sleep(1)
-    for b in repo.branches:
-        print(f"  {b.name}: behind={b.is_behind}")
-    time.sleep(10)
-    for b in repo.branches:
-        print(f"  {b.name}: behind={b.is_behind}")
-    # repo.fetch()
-    # repo.checkout("new-branch")
-    # print(branches.decode())
+    while True:
+        for b in repo.branches:
+            if b.is_behind:
+                print(f"  {b.name}: behind={b.is_behind}")
+                with b:
+                    pipeline = Path("pyci_pipeline.py")
+                    if pipeline.exists():
+                        call([sys.executable, "pyci_pipeline.py"])
+                    else:
+                        print("No pipeline to run")
+        time.sleep(10)
