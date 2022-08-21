@@ -12,14 +12,16 @@ PYTHON = sys.executable
 def on_success():
     with open("CI-results", "w") as f:
         f.write(f"success: {datetime.now()}")
-    call(["git", "update-index", "--skip-worktree", "CI-results"])
+    call(["git", "update-index", "--no-skip-worktree", "CI-results"])
+    call(["git", "update-index", "--assume-unchanged", "CI-results"])
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "pass"])
     call(["git", "push"])
 def on_failure():
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
-    call(["git", "update-index", "--skip-worktree", "CI-results"])
+    call(["git", "update-index", "--no-skip-worktree", "CI-results"])
+    call(["git", "update-index", "--assume-unchanged", "CI-results"])
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "fail"])
     call(["git", "push"])
