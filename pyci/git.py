@@ -19,12 +19,12 @@ class Branch:
         self.is_behind = False
 
     def __enter__(self):
-        self.exit_branch = check_output(
-            ["git", "rev-parse", "--abbrev-ref", "HEAD"]
-        ).decode().strip()
+        self.exit_branch = (
+            check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).decode().strip()
+        )
         self.checkout()
         return self
-    
+
     def __exit__(self, exc_type, exc_value, tb):
         self.repo._run(["git", "checkout", self.exit_branch])
         self.repo._run(["git", "stash", "apply"])

@@ -25,15 +25,14 @@ if __name__ == "__main__":
         "-t",
         "--timeout",
         type=int,
-        default=30,
-        help="time to wait between querying the repo hosting service for changes",
+        default=60 * 60,  # every hour
+        help="time to wait between querying the repo hosting service for changes. default = 3600 (seconds)",
     )
     args = parser.parse_args()
     repo = Git()
     while True:
         for b in repo.branches:
             if b.is_behind:
-                print(f"  {b.name}: behind={b.is_behind}")
                 with b:
                     pipeline = Path(args.file)
                     if pipeline.exists():
