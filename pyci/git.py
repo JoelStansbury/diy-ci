@@ -49,7 +49,7 @@ class Git:
         call(args)
 
     def fetch(self):
-        self._run(["git", "fetch"])
+        self._run(["git", "fetch", "-p"])
 
     @property
     def branches(self):
