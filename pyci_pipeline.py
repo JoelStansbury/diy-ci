@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print("now testing something else")
     try:
         print("do some testing")
-        raise ValueError("what happens on an error")
+        # raise ValueError("what happens on an error")
         on_success()
     except:
         print("I expected that error")
