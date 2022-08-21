@@ -10,7 +10,7 @@ CONDA_BAT = os.environ["CONDA_BAT"]
 PYTHON = sys.executable
 
 def delete_previous_results():
-    call(["git", "filter-branch", "--tree-filter", "'git rm -f CI-results'", "HEAD"])
+    call(["git", "filter-branch", "--tree-filter", "'git", "rm", "-f", "CI-results'", "HEAD"])
     call(["git", "push", "origin", "--force", "--all"])
 
 def on_success():
