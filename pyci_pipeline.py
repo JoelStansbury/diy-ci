@@ -19,12 +19,14 @@ def on_success():
         f.write(f"success: {datetime.now()}")
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "pass"])
+    upload_results()
 def on_failure():
     call(["git", "rm", "CI-results"])
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "fail"])
+    upload_results()
 
 
 if __name__ == "__main__":
