@@ -18,7 +18,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     repo = Git()
-    print(repo.branches)
+    for b in repo.branches:
+        print(f"{b.name}: behind={b.is_behind}")
     # repo.fetch()
     # repo.checkout("new-branch")
     # print(branches.decode())

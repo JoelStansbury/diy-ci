@@ -6,14 +6,30 @@ CACHE = TimedCache(default_timeout=10)
 
 class Branch:
 
-    def __init__(self, name, hash, commit_tag, is_head):
+    def __init__(
+        self,
+        name,
+        hash,
+        commit_tag,
+        is_head,
+        is_active,
+        is_ahead,
+        is_behind,
+        repo
+    ):
         self.name=name
         self.hash=hash
         self.commit_tag=commit_tag
         self.is_head=is_head
+        self.is_active = is_active
+        self.is_ahead=is_ahead
+        self.is_behind = is_behind
+        self.repo=repo
     
     def checkout(self):
-        call["git", "checkout", self.name]
+        self.repo._run(["git", "stash"])
+        self.repo._run(["git", "checkout", self.name])
+        self.repo._run(["git", "pull"])
 
     def __str__(self):
         return self.name
@@ -32,30 +48,51 @@ class Git:
         print("RUN:", " ".join(args))
         call(args)
 
-    def stash(self):
-        self._run(["git", "stash"])
-
     def fetch(self):
         self._run(["git", "fetch"])
-    
-    def checkout(self, branch):
-        self._run(["git", "checkout", branch])
-    
+
     @property
     def branches(self):
         self.fetch()
-        resp = self._fetch(["git", "branch", "-r", "-v"])
+
+        # Info about local repo (must occur after `git fetch`)
+        local_resp = self._fetch(["git", "branch", "-v"])
+        lines = local_resp.split("\n")
+        active = {}
+        ahead = {}
+        behind = {}
+        for line in lines:
+            if line.strip():
+                is_active = False
+                parts = line.split()
+                if parts[0] == "*":
+                    is_active = True
+                    parts = parts[1:]
+                name, hash, *info = parts
+
+                ahead[name] = info[0] == "[ahead"
+                behind[name] = info[0] == "[behind"
+                active[name] = is_active
+
+        # Info about remote repo
+        remote_resp = self._fetch(["git", "branch", "-r", "-v"])
+
         branches = []
-        lines = resp.split("\n")
+        lines = remote_resp.split("\n")
         head_name = lines[0].split("->")[1].strip()
         for line in lines[1:-1]:
             name, hash, *info = line.split()
+            name = name[len("origin/"):]
             branches.append(
                 Branch(
                     name=name,
                     hash=hash,
                     commit_tag=" ".join(info),
-                    is_head=name==head_name
+                    is_head=name==head_name,
+                    is_active=active.get(name, False),
+                    is_ahead=ahead.get(name, False),
+                    is_behind=behind.get(name, True),
+                    repo=self
                 )
             )
         return branches
