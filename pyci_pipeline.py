@@ -14,18 +14,16 @@ def delete_previous_results():
     call(["git", "push", "origin", "--force", "--all"])
 
 def on_success():
-    call(["git", "rm", "CI-results"])
+    delete_previous_results()
     with open("CI-results", "w") as f:
         f.write(f"success: {datetime.now()}")
-    delete_previous_results()
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "pass"])
     call(["git", "push"])
 def on_failure():
-    call(["git", "rm", "CI-results"])
+    delete_previous_results()
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
-    delete_previous_results()
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "fail"])
     call(["git", "push"])
