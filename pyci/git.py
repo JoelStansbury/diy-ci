@@ -70,13 +70,3 @@ class Git:
             behind = local.get(name, None) != hash
             branches.append(Branch(name, hash, behind, self))
         return branches
-
-    # @property
-    # def pull_requests(self):
-    #     resp = self._fetch(["git", "ls-remote", "origin"])
-    #     for line in resp.split("\n"):
-    #         if "refs/pull/" in line:
-    #             source_hash = line.split()[0]
-    #             dest_name = line.split("refs/pull/")[1]
-    #             source = [b for b in self.branches if b.hash == source_hash][0]
-    #             source = [b for b in self.branches if b.hash == source_hash][0]

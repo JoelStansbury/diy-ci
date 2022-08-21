@@ -1,6 +1,6 @@
 import argparse
 import os
-from .git import Git
+from .git import Git, CACHE
 import time
 import sys
 from subprocess import call
@@ -21,6 +21,13 @@ if __name__ == "__main__":
         default="pyci_pipeline.py",
         help="instruction set for pyci, default='pyci.yml'",
     )
+    parser.add_argument(
+        "-t",
+        "--timeout",
+        type=int,
+        default=30,
+        help="time to wait between querying the repo hosting service for changes",
+    )
     args = parser.parse_args()
     repo = Git()
     while True:
@@ -28,9 +35,9 @@ if __name__ == "__main__":
             if b.is_behind:
                 print(f"  {b.name}: behind={b.is_behind}")
                 with b:
-                    pipeline = Path("pyci_pipeline.py")
+                    pipeline = Path(args.file)
                     if pipeline.exists():
-                        call([sys.executable, "pyci_pipeline.py"])
+                        call([sys.executable, str(pipeline)])
                     else:
                         print("No pipeline to run")
-        time.sleep(10)
+        time.sleep(args.timeout)
