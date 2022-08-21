@@ -1,5 +1,5 @@
 # pyci
-Package for continuous testing and deployment of git repositories independed of hosting service (gihub, bitbucket, ...)
+Package for continuous testing and deployment of git repositories independent of hosting service (gihub, bitbucket, ...)
 
 ## how it works
 Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script is executed.
