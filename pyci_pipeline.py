@@ -34,7 +34,7 @@ if __name__ == "__main__":
         # check_call(["pip", "install", "-e", ".", "--no-deps"])
         # check_call(["pip", "check"])
         print("do some testing")
-        # raise ValueError("what happens on an error")
+        raise ValueError("what happens on an error")
         on_success()
     except Exception as e:
         print(e)
