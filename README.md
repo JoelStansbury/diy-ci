@@ -2,7 +2,7 @@
 Package for continuous testing and deployment of git repositories independent of hosting service (gihub, bitbucket, ...)
 
 ## When it is useful
-This is useful when you want quick, easy, and free CI testing. If you can create a python script to execute what you want to be done then this will work for you. There is no requirement for port forwarding and will work on any git repo hosting service (even locally hosted repositories).
+This is useful when you want quick, easy, and free CI testing. If you can create a python script to do what you need then this will work for you. There is no requirement for port forwarding and will work for any git repo hosting service (even locally hosted repositories).
 
 ## Pitfalls
 * Currently no integration with GitHub or Bitbucket, so it will not prevent PRs from merging unless you get creative with the `on_success` and `on_failure` functions.
