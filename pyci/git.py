@@ -18,6 +18,16 @@ class Branch:
         self.repo._run(["git", "pull"])
         self.is_behind = False
 
+    def __enter__(self):
+        self.exit_branch = check_output(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"]
+        ).strip()
+        self.checkout()
+    
+    def __exit__(self):
+        self.repo._run(["git", "checkout", self.exit_branch])
+        self.repo._run(["git", "stash", "apply"])
+
     def __str__(self):
         return self.name
 
