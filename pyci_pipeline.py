@@ -22,9 +22,7 @@ if __name__ == "__main__":
     try:
         print("do some testing")
         raise ValueError("what happens on an error")
+        on_success()
     except:
         print("I expected that error")
-        on_failure()
-    on_success()
-    
-    
+        on_failure()    
