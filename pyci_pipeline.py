@@ -24,6 +24,6 @@ if __name__ == "__main__":
         print("do some testing")
         # raise ValueError("what happens on an error")
         on_success()
-    except:
-        print("I expected that error")
+    except Exception as e:
+        print(e)
         on_failure()    
