@@ -5,12 +5,12 @@ from subprocess import call
 
 def on_success():
     with open("CI-results", "w") as f:
-        f.write(f"success: {datetime()}")
+        f.write(f"success: {datetime.now()}")
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "\"ci\""])
 def on_failure():
     with open("CI-results", "w") as f:
-        f.write(f"failure: {datetime()}")
+        f.write(f"failure: {datetime.now()}")
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "\"ci\""])
 
