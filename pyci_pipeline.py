@@ -9,21 +9,17 @@ CONDA = os.environ["CONDA_EXE"]
 CONDA_BAT = os.environ["CONDA_BAT"]
 PYTHON = sys.executable
 
-def delete_previous_results():
-    call(["git", "filter-branch", "--tree-filter", "'rm", "-f", "pyci/CI-results'", "HEAD"])
-    call(["git", "push", "origin", "--force", "--all"])
-
 def on_success():
-    delete_previous_results()
     with open("CI-results", "w") as f:
         f.write(f"success: {datetime.now()}")
+    call(["git", "update-index", "--skip-worktree", "CI-results"])
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "pass"])
     call(["git", "push"])
 def on_failure():
-    delete_previous_results()
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
+    call(["git", "update-index", "--skip-worktree", "CI-results"])
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "fail"])
     call(["git", "push"])
