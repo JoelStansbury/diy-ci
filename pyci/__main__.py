@@ -23,15 +23,14 @@ if __name__ == "__main__":
     repo = Git()
     for b in repo.branches:
         if b.is_behind:
-            b.checkout()
+            with b:
+                print(f"just checked out {b.name}")
         print(f"  {b.name}: behind={b.is_behind}")
     time.sleep(1)
     for b in repo.branches:
         print(f"  {b.name}: behind={b.is_behind}")
     time.sleep(10)
     for b in repo.branches:
-        if b.name == "main":
-            b.checkout()
         print(f"  {b.name}: behind={b.is_behind}")
     # repo.fetch()
     # repo.checkout("new-branch")
