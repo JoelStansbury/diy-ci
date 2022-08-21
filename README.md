@@ -19,7 +19,6 @@ Reapeatedly pings remote repo for changes to branches. When a change/new branch 
 * clone the repository you wish to test
 * cd into the repo
 * run `python -m pyci [-f PIPELINE_SCRIPT.py]`
-  * this will initiate the infinite loop
 
 ## TODO
 * integrate with github and bitbucket ci to notify succesful deployment
