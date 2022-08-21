@@ -21,7 +21,7 @@ def on_failure():
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
     call(["git", "update-index", "--no-skip-worktree", "CI-results"])
-    call(["git", "update-index", "--assume-unchanged", "CI-results"])
+    call(["git", "update-index", "--no-assume-unchanged", "CI-results"])
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "fail"])
     call(["git", "push"])
