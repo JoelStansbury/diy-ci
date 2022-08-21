@@ -10,12 +10,14 @@ CONDA_BAT = os.environ["CONDA_BAT"]
 PYTHON = sys.executable
 
 def on_success():
+    call(["git", "rm", "CI-results"])
     with open("CI-results", "w") as f:
         f.write(f"success: {datetime.now()}")
     call(["git", "add", "CI-results"])
     call(["git", "commit", "-m", "pass"])
     call(["git", "push"])
 def on_failure():
+    call(["git", "rm", "CI-results"])
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime.now()}")
     call(["git", "add", "CI-results"])
