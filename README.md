@@ -4,7 +4,7 @@ Package for continuous testing and deployment of git repositories independent of
 ## how it works
 Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script is executed.
 
-> NOTE: You should not use this on public repos as a Pull-Request from a fork can be used to run malicious code on your machine. This is also true with self-hosted GitHub actions
+> NOTE: You should not use this on public repos as a Pull-Request from a fork can be used to run malicious code on your machine. This is also true with self-hosted GitHub runners
 
 
 ## setup
@@ -16,4 +16,3 @@ Reapeatedly pings remote repo for changes to branches. When a change/new branch 
 
 ## TODO
 * integrate with github and bitbucket ci to notify succesful deployment
-
