@@ -27,7 +27,6 @@ class Branch:
 
     def __exit__(self, exc_type, exc_value, tb):
         self.repo._run(["git", "checkout", self.exit_branch])
-        self.repo._run(["git", "stash", "apply"])
         return True
 
     def __str__(self):
