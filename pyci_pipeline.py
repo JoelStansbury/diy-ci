@@ -1,13 +1,18 @@
 import pyci
 from pathlib import Path
 from datetime import datetime
+from subprocess import call
 
 def on_success():
     with open("CI-results", "w") as f:
         f.write(f"success: {datetime()}")
+    call(["git", "add", "CI-results"])
+    call(["git", "commit", "-m", "\"ci\""])
 def on_failure():
     with open("CI-results", "w") as f:
         f.write(f"failure: {datetime()}")
+    call(["git", "add", "CI-results"])
+    call(["git", "commit", "-m", "\"ci\""])
 
 
 if __name__ == "__main__":
