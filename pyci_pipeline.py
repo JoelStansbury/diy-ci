@@ -20,6 +20,7 @@ def on_failure():
 if __name__ == "__main__":
     print("now testing something else")
     try:
+        call(["conda", "env", "update", "-f", "environment.yml"])
         print("do some testing")
         # raise ValueError("what happens on an error")
         on_success()
