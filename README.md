@@ -14,7 +14,7 @@ This is useful when you want quick, easy, and free CI testing. If you can create
 * "No port-forwarding" means there is no avenue for queued deployments, which means the testing instance must continuously ping the repo host for changes.
 * With the current pipeline example, you get a ton of unnecesary commits (basically double what you would have without). This can be mitigated by squashing prior to merge however
 
-## setup
+## Setup
 On your remote testing machine
 * clone the repository you wish to test
 * cd into the repo
