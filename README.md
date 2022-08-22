@@ -17,6 +17,7 @@ This is useful when you want quick, easy, and free CI testing. If you can create
 ## Setup
 On your remote testing machine
 * clone the repository you wish to test
+  * This copy of the repo should not be edited directly as it may cause checkout errors and stop the CI process
 * cd into the repo
 * run `python -m pyci [-f PIPELINE_SCRIPT.py]`
 
