@@ -75,8 +75,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f",
         "--file",
-        default="pyci_pipeline.py",
-        help="instruction set for pyci, default='pyci.yml'",
+        default="ci/pipeline.py",
+        help="instruction set for pyci, default='ci/pipeline.py'",
     )
     parser.add_argument(
         "-t",

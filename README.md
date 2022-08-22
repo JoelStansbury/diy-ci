@@ -16,10 +16,13 @@ This is useful when you want quick, easy, and free CI testing. If you can create
 
 ## Setup
 On your remote testing machine
-* clone the repository you wish to test
-  * This copy of the repo should not be edited directly as it may cause checkout errors and stop the CI process
+* copy the `ci` folder into your repo
+* clone the repository you wish to test on the system that will do the testing
+  * This new copy of the repo should not be edited directly as it may cause checkout errors and stop the CI process
 * cd into the repo
-* run `python -m pyci [-f PIPELINE_SCRIPT.py]`
+* run `python ci/runner.py [-f PATH/TO/SCRIPT] [-t POLLING_INTERVAL_SECONDS]`
+
+That's it, you'll have a CI pipeline until it fails or you stop it. When it does fail, please let me know in the Issues section.
 
 ## TODO
 * integrate with github and bitbucket ci to notify succesful deployment
