@@ -27,3 +27,4 @@ That's it, you'll have a CI pipeline until it fails or you stop it. When it does
 ## TODO
 * integrate with github and bitbucket ci to notify succesful deployment
 * with github you can use `git ls-remote` to determine which branches are in PR which can be a useful trigger for testing
+t
