@@ -24,4 +24,4 @@ On your remote testing machine
 * cd into the repo
 * run `python ci/runner.py [-f PATH/TO/SCRIPT] [-t POLLING_INTERVAL_SECONDS]`
 
-That's it, you'll have a CI pipeline until it fails or you stop it. When it does fail, please let me know in the Issues section.
+That's it, you'll have a CI pipeline until it fails or you stop it.
