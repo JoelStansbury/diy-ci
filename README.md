@@ -25,4 +25,4 @@ On your remote testing machine
 * run `python ci/runner.py [-f PATH/TO/SCRIPT] [-t POLLING_INTERVAL_SECONDS]`
 
 That's it, you'll have a CI pipeline until you stop it.
-> NOTE: the polling interval defaults to one hour. I suspect you'll get a nasty email if you set this too low. 60-120 seconds would probably be fine though ¯\\_(ツ)_/¯
+> NOTE: the polling interval defaults to one hour. I suspect you'll get a nasty email if you set this too low. 60-120 seconds would probably be fine though ¯\\\_(ツ)\_/¯
