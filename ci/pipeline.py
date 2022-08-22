@@ -16,7 +16,7 @@ class Conda:
         call([Conda.BAT, "activate", Conda.ENV_PATH])
 
 def respond(message):
-    with open("CI-results", "w") as f:
+    with open("ci/result", "w") as f:
         f.write(f"{message}: {datetime.now()}")
     call(["git", "add", "ci/result"])
     call(["git", "commit", "-m", message])
