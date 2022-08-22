@@ -1,7 +1,8 @@
 from datetime import datetime
-from subprocess import call
+from subprocess import call, check_output, check_call
 import os
 
+BRANCH_NAME = check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).decode().strip()
 class Conda:
     """Maybe useful class"""
     EXE = os.environ["CONDA_EXE"]
