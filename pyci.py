@@ -1,9 +1,10 @@
+import argparse
+import os
+import time
+import sys
+from subprocess import call
+from pathlib import Path
 from subprocess import check_output, call
-
-from .timed_cache import TimedCache
-
-CACHE = TimedCache(default_timeout=10)
-
 
 class Branch:
     def __init__(self, name, hash, is_behind, repo):
@@ -29,13 +30,6 @@ class Branch:
         self.repo._run(["git", "checkout", self.exit_branch])
         return True
 
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return self.name
-
-
 class Git:
     def _fetch(self, args):
         print("FETCH:", " ".join(args))
@@ -49,7 +43,6 @@ class Git:
         self._run(["git", "fetch", "-p"])
 
     @property
-    @CACHE
     def branches(self):
         self.fetch()
         refs = [
@@ -69,3 +62,38 @@ class Git:
             behind = local.get(name, None) != hash
             branches.append(Branch(name, hash, behind, self))
         return branches
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-p",
+        "--path",
+        type=str,
+        default=os.getcwd(),
+        help="directory of the repo, default=cwd",
+    )
+    parser.add_argument(
+        "-f",
+        "--file",
+        default="pyci_pipeline.py",
+        help="instruction set for pyci, default='pyci.yml'",
+    )
+    parser.add_argument(
+        "-t",
+        "--timeout",
+        type=int,
+        default=60 * 60,  # every hour
+        help="time to wait between querying the repo hosting service for changes. default = 3600 (seconds)",
+    )
+    args = parser.parse_args()
+    repo = Git()
+    while True:
+        for b in repo.branches:
+            if b.is_behind:
+                with b:
+                    pipeline = Path(args.file)
+                    if pipeline.exists():
+                        call([sys.executable, str(pipeline)])
+                    else:
+                        print("No pipeline to run")
+        time.sleep(args.timeout)
