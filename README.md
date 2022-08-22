@@ -4,6 +4,8 @@ Script for starting a CI/CD service for git repositories independent of hosting 
 ## How it works
 Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script `ci/pipeline.py` is executed.
 
+Because there is no dependence on the remote host, there is no way to interface with the PR-blocking we've come to expect from CI pipelines. However, the example pipeline adds a file called `ci/result` which is updated after each run to show if it failed or passed. IMO this is sufficient. If a programmer would merge a PR where the last commit is titled `"failure"`, I would be more concerned about what they are commiting directly to `main`.
+
 > NOTE: You should not use this on public repos as a Pull-Request from a fork can be used to run malicious code on your machine. This is also true for self-hosted GitHub runners
 
 ## When it is useful
