@@ -39,12 +39,9 @@ class Git:
         print("RUN:", " ".join(args))
         call(args)
 
-    def fetch(self):
-        self._run(["git", "fetch", "-p"])
-
     @property
     def branches(self):
-        self.fetch()
+        self._run(["git", "fetch", "-p"])
         refs = [
             x.split() for x in self._fetch(["git", "for-each-ref"]).split("\n")[:-1]
         ]
@@ -65,13 +62,6 @@ class Git:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-p",
-        "--path",
-        type=str,
-        default=os.getcwd(),
-        help="directory of the repo, default=cwd",
-    )
     parser.add_argument(
         "-f",
         "--file",
