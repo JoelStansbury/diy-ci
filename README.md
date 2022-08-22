@@ -15,7 +15,7 @@ This is useful when you want quick, easy, and free CI testing. If you can create
 * With the current pipeline example, you get a ton of unnecesary commits (basically double what you would have without). This can be mitigated by squashing prior to merge however
 
 ## setup
-* on your remote testing machine
+On your remote testing machine
 * clone the repository you wish to test
 * cd into the repo
 * run `python -m pyci [-f PIPELINE_SCRIPT.py]`
