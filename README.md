@@ -1,10 +1,10 @@
 # pyci
-Package for continuous testing and deployment of git repositories independent of hosting service (gihub, bitbucket, ...)
+Script for starting a CI/CD service for git repositories independent of hosting service (gihub, bitbucket, ...)
 
 ## How it works
-Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script is executed.
+Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script `ci/pipeline.py` is executed.
 
-> NOTE: You should not use this on public repos as a Pull-Request from a fork can be used to run malicious code on your machine. This is also true with self-hosted GitHub runners
+> NOTE: You should not use this on public repos as a Pull-Request from a fork can be used to run malicious code on your machine. This is also true for self-hosted GitHub runners
 
 ## When it is useful
 This is useful when you want quick, easy, and free CI testing. If you can create a python script to do what you need then this will work for you. There is no requirement for port forwarding and will work for any git repo hosting service (even locally hosted repositories).
@@ -23,7 +23,3 @@ On your remote testing machine
 * run `python ci/runner.py [-f PATH/TO/SCRIPT] [-t POLLING_INTERVAL_SECONDS]`
 
 That's it, you'll have a CI pipeline until it fails or you stop it. When it does fail, please let me know in the Issues section.
-
-## TODO
-* integrate with github and bitbucket ci to notify succesful deployment
-* with github you can use `git ls-remote` to determine which branches are in PR which can be a useful trigger for testing
