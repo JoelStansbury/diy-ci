@@ -23,3 +23,4 @@ On your remote testing machine
 
 ## TODO
 * integrate with github and bitbucket ci to notify succesful deployment
+* with github you can use `git ls-remote` to determine which branches are in PR which can be a useful trigger for testing
