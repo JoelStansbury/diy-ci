@@ -18,7 +18,7 @@ class Conda:
 def respond(message):
     with open("CI-results", "w") as f:
         f.write(f"{message}: {datetime.now()}")
-    call(["git", "add", "CI-results"])
+    call(["git", "add", "ci/result"])
     call(["git", "commit", "-m", message])
     call(["git", "push"])
 
