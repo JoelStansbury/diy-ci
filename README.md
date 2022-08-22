@@ -7,6 +7,7 @@ This is useful when you want quick, easy, and free CI testing. If you can create
 ## Pitfalls
 * Currently no integration with GitHub or Bitbucket, so it will not prevent PRs from merging unless you get creative with the `on_success` and `on_failure` functions.
 * "No port-forwarding" means there is no avenue for queued deployments, which means the testing instance must continuously ping the repo host for changes.
+* With the current pipeline example, you get a ton of unnecesary commits (basically double what you would have without). This can be mitigated by squashing prior to merg however
 
 ## How it works
 Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script is executed.
