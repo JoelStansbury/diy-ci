@@ -1,6 +1,8 @@
 # pyci
 Pure python CI/CD service for git repositories independent of hosting service (gihub, bitbucket, ...)
 
+__Disclaimer:__ Every commit to any branch has the potential to execute malicious code on the testing machine.
+
 ## How it works
 Reapeatedly pings remote repo for changes to branches. When a change/new branch is detected, a pipeline script `ci/pipeline.py` is executed.
 
