@@ -11,7 +11,7 @@ Because there is no dependence on the remote host, there is no way to interface 
 ## When it is useful
 This is useful when you want quick, easy, and free CI testing. If you can create a python script to do what you need then this will work for you. There is no requirement for port forwarding and will work for any git repo hosting service (even locally hosted repositories).
 
-It does not suffer from the same vulnerability w.r.t. malicious pull-requests like self-hosted github runners do. Forks do not show up in `git for-each-ref` so they wont trigger a run. Meaning it should be fine to use on public repos (see [self-hosted-runner-security](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security)).
+It does not suffer from the same vulnerability w.r.t. malicious pull-requests like self-hosted github runners do. Forks do not show up in `git for-each-ref` so they wont trigger a run. Meaning it should be fine to use on public repos (see [self-hosted-runner-security](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security)). Though, as noted above, any collaborator with authority to push changes to the repo can run arbitrary code on the test machine.
 
 ## Pitfalls
 * Currently no integration with GitHub or Bitbucket, so it will not prevent PRs from merging.
